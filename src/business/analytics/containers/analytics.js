@@ -12,6 +12,12 @@ import { actions as myActions, selectors as mySelectors } from 'business/analyti
 import AnalyticsComponent from '../components/analytics'
 
 class Analytics extends Component {
+  componentWillMount() {
+    this.props.actions.startRealtimeAnalytics({
+      storeId: this.props.storeId
+    })
+  }
+
   componentWillUnmount() {
     this.props.actions.clear()
   }

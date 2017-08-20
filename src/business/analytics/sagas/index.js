@@ -1,2 +1,4 @@
-import Initialize from './initialize';
-module.exports = { Initialize };
+import StartRealtimeAnalytics from './start-realtime-analytics';
+module.exports = {
+  StartRealtimeAnalytics
+};

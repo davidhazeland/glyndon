@@ -6,11 +6,12 @@ import * as selectors from './selectors'
 import component from './containers/welcome'
 
 export {
+  component,
+
   name,
   reducer,
   actions,
   sagas,
-  component,
   selectors
 }
 

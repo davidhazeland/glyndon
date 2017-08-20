@@ -1,20 +1,20 @@
 import { call, put, take, fork } from 'redux-saga/effects'
 
-import saga, { handle } from '../initialize'
+import saga, { handle } from '../start-realtime-analytics'
 import { actions } from '../../index'
 
 describe('Analytics', () => {
-  test('[Saga] Initialize', () => {
+  test('[Saga] StartRealtimeAnalytics', () => {
     const sagaIterator = saga()
 
     let actual
     let expected
 
     const parameter = {}
-    const action = actions.initialize(parameter)
+    const action = actions.startRealtimeAnalytics(parameter)
 
     actual = sagaIterator.next().value
-    expected = take(actions.initialize)
+    expected = take(actions.startRealtimeAnalytics)
 
     expect(actual).toEqual(expected)
 
@@ -24,15 +24,15 @@ describe('Analytics', () => {
     expect(actual).toEqual(expected)
 
     actual = sagaIterator.next().value
-    expected = take(actions.initialize)
+    expected = take(actions.startRealtimeAnalytics)
 
     expect(actual).toEqual(expected)
   })
 
-  describe('[Saga] Initialize - handle() generator', () => {
+  describe('[Saga] StartRealtimeAnalytics - handle() generator', () => {
     xtest('Exception', () => {
       const parameter = {}
-      const action = actions.initialize(parameter)
+      const action = actions.startRealtimeAnalytics(parameter)
       const sagaIterator = handle(action)
 
       let actual
