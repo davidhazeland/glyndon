@@ -53,7 +53,8 @@ function* getAnalytics(storeId) {
     yield put(actions.set({
       spend,
       revenue,
-      cost
+      cost,
+      orderCount: orders.length
     }))
   }
   catch (e) {
