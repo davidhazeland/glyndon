@@ -7,13 +7,15 @@ import Header from '../containers/header'
 import { Container } from 'semantic-ui-react'
 
 import {component as Welcome} from '../../welcome'
+import {component as Analytics} from '../../analytics'
 
 const App = (props) => {
   return (
     <div className="App">
       <Header path={props.path}/>
       <Container>
-        <Route path="/" component={Welcome}/>
+        <Route path="/" exact component={Welcome}/>
+        <Route path="/analytics/:storeId" component={Analytics}/>
       </Container>
     </div>
   )
