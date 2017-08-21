@@ -10,6 +10,8 @@ import AdInsightApi from 'api/ad-insight'
 import orderAPI from 'api/order'
 import productAPI from 'api/product'
 
+const timeout = 10000
+
 function getInfo(orders, products) {
   return orders.reduce((reduction, order) => {
     const items = order.items;
@@ -54,7 +56,8 @@ function* getAnalytics(storeId) {
       spend,
       revenue,
       cost,
-      orderCount: orders.length
+      orderCount: orders.length,
+      pure: false
     }))
   }
   catch (e) {
@@ -67,7 +70,7 @@ function* realtimeAnalytics(storeId) {
     while (true) {
       yield fork(getAnalytics, storeId)
 
-      yield call(delay, 60000)
+      yield call(delay, timeout)
     }
   }
   finally {
