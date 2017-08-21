@@ -20,6 +20,7 @@ class Analytics extends Component {
 
   componentWillUnmount() {
     this.props.actions.clear()
+    this.props.actions.stopRealtimeAnalytics()
   }
 
   render() {

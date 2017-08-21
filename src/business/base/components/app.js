@@ -1,3 +1,4 @@
+import 'semantic-ui-css/semantic.min.css'
 require('styles/index.css')
 
 import React from 'react'
@@ -13,7 +14,7 @@ const App = (props) => {
   return (
     <div className="App">
       <Header path={props.path}/>
-      <Container>
+      <Container style={{marginTop: 25}}>
         <Route path="/" exact component={Welcome}/>
         <Route path="/analytics/:storeId" component={Analytics}/>
       </Container>

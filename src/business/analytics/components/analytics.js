@@ -1,21 +1,13 @@
 import React from 'react'
 
-const Analytics = (props) => {
-  const {
-    spend,
-    revenue,
-    cost,
-    orderCount
-  } = props
+import Order from './analytics-order'
+import Profit from './analytics-profit'
 
+const Analytics = (props) => {
   return (
     <div className="Analytics">
-      Analytics
-      
-      <p>Spend: {spend}</p>
-      <p>Revenue: {revenue}</p>
-      <p>Fulfill: {cost}</p>
-      <p>Orders: {orderCount}</p>
+      <Order {...props}/>
+      <Profit {...props}/>
     </div>
   )
 }

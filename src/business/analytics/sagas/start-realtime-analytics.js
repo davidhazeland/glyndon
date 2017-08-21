@@ -35,7 +35,7 @@ function* getAnalytics(storeId) {
 
     const {objectId: adAccId, timezone} = adAcc.toJSON()
 
-    const now = moment().tz(timezone).subtract(1, 'day').startOf('day')
+    const now = moment().tz(timezone).startOf('day')
     const today = now.format('YYYY-MM-DD')
     const todayTimestamp = parseInt(now.format('X'), 10)
 
@@ -71,8 +71,9 @@ function* realtimeAnalytics(storeId) {
     }
   }
   finally {
-    if (yield cancelled())
-      yield put(actions.requestFailure('realtime cancelled!'))
+    if (yield cancelled()){
+
+    }
   }
 }
 
