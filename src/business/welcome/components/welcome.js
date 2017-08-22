@@ -10,10 +10,8 @@ const Welcome = () => {
         Welcome to Glyndon
       </h3>
 
-      <Grid columns="4">
-        <Grid.Column>
-        </Grid.Column>
-        <Grid.Column>
+      <Grid centered>
+        <Grid.Column computer="4" mobile="8">
           <Link to="/analytics/RMQrzVJo9C">
             <Card
               header='David Hazeland'
@@ -22,7 +20,7 @@ const Welcome = () => {
             />
           </Link>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column computer="4" mobile="8">
           <Link to="/analytics/GYniQV6lRB">
             <Card
               header='Infinit Store'

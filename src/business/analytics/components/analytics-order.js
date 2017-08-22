@@ -17,21 +17,27 @@ const AnalyticsOrder = (props) => {
         header='Order'
       />
       <Segment className='attached fluid'>
-        <Grid columns={3} divided textAlign="center">
+        <Grid divided textAlign="center" relaxed>
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny'>
                 <Statistic.Label>Today</Statistic.Label>
                 <Statistic.Value>{orderCount}</Statistic.Value>
               </Statistic>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
+              <Statistic size='tiny' color='blue'>
+                <Statistic.Label>Revenue</Statistic.Label>
+                <Statistic.Value>{dollar(revenue)}</Statistic.Value>
+              </Statistic>
+            </Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny'>
                 <Statistic.Label>AOV</Statistic.Label>
                 <Statistic.Value>{dollar(revenue/orderCount)}</Statistic.Value>
               </Statistic>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny'>
                 <Statistic.Label>CPA</Statistic.Label>
                 <Statistic.Value>{dollar(spend/orderCount)}</Statistic.Value>

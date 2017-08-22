@@ -19,33 +19,27 @@ const AnalyticsProfit = (props) => {
         header='Finance'
       />
       <Segment className='attached fluid'>
-        <Grid columns={5} divided textAlign="center">
+        <Grid divided textAlign="center">
           <Grid.Row>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny' color='orange'>
                 <Statistic.Label>Fulfillment</Statistic.Label>
                 <Statistic.Value>{dollar(cost)}</Statistic.Value>
               </Statistic>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny' color='orange'>
                 <Statistic.Label>Spent</Statistic.Label>
                 <Statistic.Value>{dollar(spend)}</Statistic.Value>
               </Statistic>
             </Grid.Column>
-            <Grid.Column>
-              <Statistic size='tiny' color='blue'>
-                <Statistic.Label>Revenue</Statistic.Label>
-                <Statistic.Value>{dollar(revenue)}</Statistic.Value>
-              </Statistic>
-            </Grid.Column>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny' color={profit >= 0 ? 'green' : 'red'}>
                 <Statistic.Label>Profit</Statistic.Label>
                 <Statistic.Value>{dollar(profit)}</Statistic.Value>
               </Statistic>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column computer="4" mobile="8">
               <Statistic size='tiny' color={profit >= 0 ? 'green' : 'red'}>
                 <Statistic.Label>ROI</Statistic.Label>
                 <Statistic.Value>{percent(profit/spend)}</Statistic.Value>
