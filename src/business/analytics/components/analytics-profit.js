@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Message, Segment, Grid, Statistic } from 'semantic-ui-react'
-import { dollar, decimal } from 'utils/format'
+import { dollar, percent } from 'utils/format'
 
 const AnalyticsProfit = (props) => {
   const {
@@ -48,7 +48,7 @@ const AnalyticsProfit = (props) => {
             <Grid.Column>
               <Statistic size='tiny' color={profit >= 0 ? 'green' : 'red'}>
                 <Statistic.Label>ROI</Statistic.Label>
-                <Statistic.Value>{decimal(profit/spend)}</Statistic.Value>
+                <Statistic.Value>{percent(profit/spend)}</Statistic.Value>
               </Statistic>
             </Grid.Column>
           </Grid.Row>
