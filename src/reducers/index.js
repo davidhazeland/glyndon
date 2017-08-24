@@ -1,3 +1,4 @@
+import Report from '../business/report'
 import Analytics from '../business/analytics'
 import Welcome from '../business/welcome'
 import Notification from 'raket-react/business/notification'
@@ -10,6 +11,7 @@ import { routerReducer as routing } from 'react-router-redux'
 import { reducer as form } from 'redux-form'
 import { i18nReducer as i18n } from 'react-redux-i18n'
 const reducers = {
+  ...Report,
   ...Analytics,
   ...Welcome,
   ...Notification,
