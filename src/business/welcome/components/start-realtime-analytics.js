@@ -59,7 +59,6 @@ export function* getAnalytics(storeId) {
     const {revenue, cost} = getInfo(orders.map(toJSON), products.map(toJSON))
 
     return {
-      id: storeId,
       spend,
       revenue,
       cost,

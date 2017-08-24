@@ -4,8 +4,10 @@ import sagas from './sagas'
 import * as selectors from './selectors'
 
 import component from './containers/analytics'
+import { getAnalytics } from './sagas/start-realtime-analytics'
 
 export {
+  getAnalytics,
   component,
 
   name,
