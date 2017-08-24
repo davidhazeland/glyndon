@@ -1,4 +1,4 @@
-import { call, put, take, fork, cancel, cancelled } from 'redux-saga/effects'
+import { call, put, take, fork, cancel, cancelled, all } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
 import moment from 'moment-timezone'
@@ -11,6 +11,7 @@ import orderAPI from 'api/order'
 import productAPI from 'api/product'
 
 const timeout = 10000
+const timezone = 'America/Los_Angeles'
 
 function getInfo(orders, products) {
   return orders.reduce((reduction, order) => {
@@ -33,17 +34,22 @@ function getInfo(orders, products) {
 
 function* getAnalytics(storeId) {
   try {
-    const [adAcc] = yield call(AdAccApi.getByStoreId, storeId)
-
-    const {objectId: adAccId, timezone} = adAcc.toJSON()
-
     const now = moment().tz(timezone).startOf('day')
     const today = now.format('YYYY-MM-DD')
     const todayTimestamp = parseInt(now.format('X'), 10)
 
-    const [adInsight] = yield call(AdInsightApi.getByAdAccId, adAccId, today)
 
-    const {spend} = adInsight.toJSON()
+    const adAccList = yield call(AdAccApi.getByStoreId, storeId)
+
+    const adInsights = yield all(adAccList.map(adAcc => {
+      const {objectId: adAccId} = adAcc.toJSON()
+
+      return call(AdInsightApi.getByAdAccId, adAccId, today)
+    }))
+
+    const spend = adInsights.reduce((total, adInsight) => {
+      return total + adInsight.toJSON().spend
+    }, 0)
 
     const orders = yield call(orderAPI.getByStoreId, storeId, todayTimestamp)
     const products = yield call(productAPI.getByStoreId, storeId)

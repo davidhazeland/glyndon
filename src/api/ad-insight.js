@@ -11,5 +11,5 @@ export function getByAdAccId(id, date) {
   query.equalTo('account', new AdvertAccount({id}))
   query.equalTo('date', date)
 
-  return query.find()
+  return query.first()
 }
