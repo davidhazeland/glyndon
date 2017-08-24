@@ -9,6 +9,7 @@ import { Container } from 'semantic-ui-react'
 
 import {component as Welcome} from '../../welcome'
 import {component as Analytics} from '../../analytics'
+import {component as Report} from '../../report'
 
 const App = (props) => {
   return (
@@ -17,6 +18,7 @@ const App = (props) => {
       <Container style={{marginTop: 25}}>
         <Route path="/" exact component={Welcome}/>
         <Route path="/analytics/:storeId" component={Analytics}/>
+        <Route path="/report/:storeId" component={Report}/>
       </Container>
     </div>
   )
