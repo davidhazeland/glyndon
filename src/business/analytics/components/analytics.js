@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { Loader, Button, Dropdown } from 'semantic-ui-react'
 
 import LastOrders from './analytics-last-orders'
+import OrderChart from './analytics-order-chart'
 
 const timeOptions = [
   {
@@ -53,6 +54,8 @@ const Analytics = (props) => {
           </Link>
 
           <div style={{clear: 'both'}}>
+            <OrderChart orders={orders}/>
+
             <Order {...props}/>
             <Profit {...props}/>
 

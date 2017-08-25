@@ -1,5 +1,7 @@
 import React from 'react'
-import moment from 'moment'
+import moment from 'moment-timezone'
+
+const timezone = 'America/Los_Angeles'
 
 import { Table } from 'semantic-ui-react'
 import { dollar } from 'utils/format'
@@ -26,7 +28,7 @@ const AnalyticsLastOrders = (props) => {
                  {order.name}
                </Table.Cell>
                <Table.Cell>
-                 {moment(order.orderDate).format('hh:mm A')}
+                 {moment(order.orderDate).tz(timezone).format('hh:mm A')}
                </Table.Cell>
                <Table.Cell>
 
