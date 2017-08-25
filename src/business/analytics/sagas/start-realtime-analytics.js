@@ -59,8 +59,10 @@ export function* getAnalytics(storeId, filter) {
     const products = yield call(productAPI.getByStoreId, storeId)
 
     const toJSON = o => o.toJSON()
+    const jsonOrders = orders.map(toJSON)
+    const jsonProducts = products.map(toJSON)
 
-    const {revenue, cost} = getInfo(orders.map(toJSON), products.map(toJSON))
+    const {revenue, cost} = getInfo(jsonOrders, jsonProducts)
 
     return {
       id: storeId,
@@ -68,6 +70,10 @@ export function* getAnalytics(storeId, filter) {
       revenue,
       cost,
       orderCount: orders.length,
+
+      orders: jsonOrders,
+      products: jsonProducts,
+
       pure: false
     }
 

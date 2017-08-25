@@ -6,6 +6,8 @@ import Profit from './analytics-profit'
 import { Link } from 'react-router-dom'
 import { Loader, Button, Dropdown } from 'semantic-ui-react'
 
+import LastOrders from './analytics-last-orders'
+
 const timeOptions = [
   {
     key: 'today',
@@ -23,6 +25,9 @@ const Analytics = (props) => {
   const {
     storeId,
     pure,
+
+    orders,
+    products,
 
     actions: {
       changeFilter
@@ -50,6 +55,8 @@ const Analytics = (props) => {
           <div style={{clear: 'both'}}>
             <Order {...props}/>
             <Profit {...props}/>
+
+            <LastOrders orders={orders} products={products}/>
           </div>
         </div>
       }
