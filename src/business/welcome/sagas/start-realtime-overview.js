@@ -16,7 +16,7 @@ function* realtimeOverview() {
   try {
     while (true) {
       const analytics = yield all(storeIdList.map(storeId => {
-        return call(getAnalytics, storeId)
+        return call(getAnalytics, storeId, {date: 'today'})
       }))
 
       yield put(actions.set({
