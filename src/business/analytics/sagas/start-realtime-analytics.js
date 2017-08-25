@@ -1,9 +1,10 @@
-import { call, put, take, fork, cancel, cancelled, all } from 'redux-saga/effects'
+import { call, put, take, fork, cancel, cancelled, all, race, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
 import moment from 'moment-timezone'
 
 import * as actions from '../actions'
+import * as selectors from '../selectors'
 
 import AdAccApi from 'api/advert-account'
 import AdInsightApi from 'api/ad-insight'
@@ -32,12 +33,15 @@ export function getInfo(orders, products) {
   });
 }
 
-export function* getAnalytics(storeId) {
+export function* getAnalytics(storeId, filter) {
   try {
-    const now = moment().tz(timezone).startOf('day')
-    const today = now.format('YYYY-MM-DD')
-    const todayTimestamp = parseInt(now.format('X'), 10)
+    const {date} = filter
 
+    const now = moment().tz(timezone).startOf('day')
+    const time = date === 'today' ? now : moment(now).subtract(1, 'day')
+    const today = time.format('YYYY-MM-DD')
+    const startTimestamp = parseInt(time.format('X'), 10)
+    const endTimestamp = parseInt(moment(time).add(1, 'day').format('X'), 10)
 
     const adAccList = yield call(AdAccApi.getByStoreId, storeId)
 
@@ -51,7 +55,7 @@ export function* getAnalytics(storeId) {
       return total + adInsight.toJSON().spend
     }, 0)
 
-    const orders = yield call(orderAPI.getByStoreId, storeId, todayTimestamp)
+    const orders = yield call(orderAPI.getByStoreId, storeId, startTimestamp, endTimestamp)
     const products = yield call(productAPI.getByStoreId, storeId)
 
     const toJSON = o => o.toJSON()
@@ -76,11 +80,16 @@ export function* getAnalytics(storeId) {
 function* realtimeAnalytics(storeId) {
   try {
     while (true) {
-      const analytics = yield call(getAnalytics, storeId)
+      const {filter} = yield select(selectors.get)
+
+      const analytics = yield call(getAnalytics, storeId, filter)
 
       yield put(actions.set(analytics))
 
-      yield call(delay, timeout)
+      yield race({
+        changeFilter: take(actions.changeFilter),
+        timeout: call(delay, timeout)
+      })
     }
   }
   finally {

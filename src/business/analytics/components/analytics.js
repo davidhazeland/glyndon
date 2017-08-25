@@ -4,22 +4,53 @@ import Order from './analytics-order'
 import Profit from './analytics-profit'
 
 import { Link } from 'react-router-dom'
-import { Loader, Button } from 'semantic-ui-react'
+import { Loader, Button, Dropdown } from 'semantic-ui-react'
+
+const timeOptions = [
+  {
+    key: 'today',
+    value: 'today',
+    text: 'Today'
+  },
+  {
+    key: 'yesterday',
+    value: 'yesterday',
+    text: 'Yesterday'
+  }
+]
 
 const Analytics = (props) => {
-  const { storeId, pure } = props
+  const {
+    storeId,
+    pure,
+
+    actions: {
+      changeFilter
+    }
+  } = props
+
+  const handleTimeChange = (e, data) => {
+    changeFilter({
+      date: data.value
+    })
+  }
+
   return (
     <div className="Analytics" style={{height: 270, position: 'relative'}}>
+      <Dropdown placeholder='Time' defaultValue="today" selection options={timeOptions} onChange={handleTimeChange}/>
+
       <Loader active={pure}/>
 
       {!pure &&
         <div>
-          <Link to={`/report/${storeId}`}>
-            <Button basic size="mini" style={{marginBottom: 10}}>Report</Button>
+          <Link to={`/report/${storeId}`} style={{margin: '10px 0', float: 'right'}}>
+            <Button basic size="mini">Report</Button>
           </Link>
 
-          <Order {...props}/>
-          <Profit {...props}/>
+          <div style={{clear: 'both'}}>
+            <Order {...props}/>
+            <Profit {...props}/>
+          </div>
         </div>
       }
     </div>

@@ -1,7 +1,7 @@
 import freeze from 'deep-freeze'
 import { handleActions } from 'redux-actions'
 
-import { clear, set } from './actions'
+import { clear, set, changeFilter } from './actions'
 
 export const name = 'Analytics'
 
@@ -11,7 +11,10 @@ export const initialState = freeze({
   cost: 0,
   orderCount: 0,
 
-  pure: true
+  pure: true,
+  filter: {
+    date: 'today'
+  }
 })
 
 export default handleActions({
@@ -21,6 +24,16 @@ export default handleActions({
     return {
       ...state,
       ...action.payload
+    }
+  },
+
+  [changeFilter]: (state, action) => {
+    return {
+      ...state,
+      filter: {
+        ...action.payload
+      },
+      pure: true
     }
   }
 }, initialState)
