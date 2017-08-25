@@ -3,7 +3,7 @@ import React from 'react'
 import { Grid, Segment, Message, Statistic, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-import { dollar, percent } from 'utils/format'
+import { dollar, percent, decimal } from 'utils/format'
 
 const storeName = {
   'RMQrzVJo9C': 'David Hazeland',
@@ -36,7 +36,7 @@ const Welcome = (props) => {
               header={storeName[id]}
             />
             <Segment className='attached fluid'>
-              <Grid divided textAlign="center" relaxed columns="5">
+              <Grid doubling textAlign="center" relaxed columns="6">
                 <Grid.Row>
                   <Grid.Column>
                     <Statistic size='tiny'>
@@ -54,6 +54,12 @@ const Welcome = (props) => {
                     <Statistic size='tiny' color='orange'>
                       <Statistic.Label>Ad Spend</Statistic.Label>
                       <Statistic.Value>{dollar(spend)}</Statistic.Value>
+                    </Statistic>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Statistic size='tiny'>
+                      <Statistic.Label>ROAS</Statistic.Label>
+                      <Statistic.Value>{decimal(revenue/spend)}</Statistic.Value>
                     </Statistic>
                   </Grid.Column>
                   <Grid.Column>
