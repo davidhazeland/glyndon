@@ -77,7 +77,6 @@ const AnalyticsOrderChart = (props) => {
     datasets: [{
       data: _.map(totalOrderByCountries, x => x.value),
       backgroundColor: [
-        '#4D4D4D',
         '#5DA5DA',
         '#FAA43A',
         '#60BD68',
@@ -94,7 +93,8 @@ const AnalyticsOrderChart = (props) => {
         '#DECF3F',
         '#F15854',
         '#FAA43A',
-        '#60BD68'
+        '#60BD68',
+        '#4D4D4D'
       ]
     }],
     labels: _.map(totalOrderByCountries, x => x.name)
