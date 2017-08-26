@@ -113,7 +113,10 @@ const AnalyticsOrderChart = (props) => {
         </Grid.Column>
         <Grid.Column computer="8" mobile="16">
           <PieChart data={dataByCountries} options={{
-              responsive: true
+              responsive: true,
+              legend: {
+                position: 'bottom'
+              }
             }}/>
         </Grid.Column>
       </Grid>
