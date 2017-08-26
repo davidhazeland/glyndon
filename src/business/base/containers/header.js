@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import HeaderComponent from '../components/header'
 
-import {selectors as authSelectors} from 'raket-react/business/authorization'
+import {actions as logoutActions} from 'business/logout'
 
 class Header extends Component {
   render() {
@@ -19,12 +19,12 @@ class Header extends Component {
 Header.propTypes = { actions: PropTypes.object.isRequired }
 function mapStateToProps(state, ownProps) {
   return {
-    Authorization: authSelectors.get(state)
+
   }
 }
 function mapDispatchToProps(dispatch) {
   const actions = {
-
+    logoutRequest: logoutActions.logoutRequest
   }
   return { actions: bindActionCreators(actions, dispatch) }
 }

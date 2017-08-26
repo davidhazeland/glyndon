@@ -2,15 +2,25 @@ import React from 'react'
 
 import { Menu } from 'semantic-ui-react'
 
-import { Link } from 'react-router-dom'
+import { isAuthorized } from 'services/auth'
 
-const Header = () => {
+const Header = (props) => {
+  const {
+    actions: {
+      logoutRequest
+    }
+  } = props
+
+  function handleLogout() {
+    logoutRequest()
+  }
+
   return (
-    <div className="Header">
+    <div className="Header" style={{marginBottom: 20}}>
       <Menu pointing secondary>
-        <Menu.Item name='home' as={Link} to="/"/>
+        <Menu.Item name='home' />
         <Menu.Menu position='right'>
-          <Menu.Item name='logout' />
+          {isAuthorized() && <Menu.Item name='logout' onClick={handleLogout}/>}
         </Menu.Menu>
       </Menu>
     </div>

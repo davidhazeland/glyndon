@@ -1,16 +1,5 @@
-import store from 'store'
+import Parse from './parse'
 
-import * as myself from './auth'
-export default myself
-
-export function saveToken(token) {
-  store.set('token', token)
-}
-
-export function clear() {
-  store.remove('token')
-}
-
-export function getToken() {
-  return store.get('token')
+export const isAuthorized = () => {
+  return Parse.User.current() !== null
 }
