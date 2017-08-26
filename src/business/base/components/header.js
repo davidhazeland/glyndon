@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Menu } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 import { isAuthorized } from 'services/auth'
 
@@ -18,7 +19,8 @@ const Header = (props) => {
   return (
     <div className="Header" style={{marginBottom: 20}}>
       <Menu pointing secondary>
-        <Menu.Item name='home' />
+        <Menu.Item name='home' as={Link} to="/"  />
+        <Menu.Item name='store' as={Link} to="/stores" />
         <Menu.Menu position='right'>
           {isAuthorized() && <Menu.Item name='logout' onClick={handleLogout}/>}
         </Menu.Menu>
