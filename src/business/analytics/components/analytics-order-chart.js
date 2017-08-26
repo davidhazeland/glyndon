@@ -6,7 +6,9 @@ import moment from 'moment-timezone'
 const timezone = 'America/Los_Angeles'
 
 import { Grid } from 'semantic-ui-react'
-const Chart = require('d3-react-squared').Main
+import { Bar as BarChart, Pie as PieChart } from 'react-chartjs-2'
+
+import { decimal } from 'utils/format'
 
 const defaultByHour = {
   '12am': [],
@@ -35,6 +37,16 @@ const defaultByHour = {
   '11pm': []
 }
 
+const mapTotalValue = (orders, key) => {
+  const totalOrder = orders.reduce((total, order) => {
+    return total + order.total
+  }, 0)
+  return {
+    name: key,
+    value: decimal(totalOrder)
+  }
+}
+
 const AnalyticsOrderChart = (props) => {
   const { orders } = props
 
@@ -42,24 +54,66 @@ const AnalyticsOrderChart = (props) => {
     return moment(order.orderDate, 'X').tz(timezone).startOf('hour').format('ha')
   })
 
-  const data = _.map({
+  const totalOrderByHour = _.map({
     ...defaultByHour,
     ...ordersByHour
-  }, (orders, hour) => {
-    return {
-      id: hour,
-      value: orders.reduce((total, order) => {
-        return total + order.total
-      }, 0)
-    }
+  }, mapTotalValue)
+
+  const ordersByCountries = _.groupBy(orders, order => {
+    return order.shippingCountry
   })
 
+  const totalOrderByCountries = _.map(ordersByCountries, mapTotalValue)
+
+  const data =  {
+      labels: _.map(totalOrderByHour, x => x.name),
+      datasets: [{
+          data: _.map(totalOrderByHour, x => x.value),
+          borderWidth: 1
+      }]
+  }
+
+  const dataByCountries = {
+    datasets: [{
+      data: _.map(totalOrderByCountries, x => x.value),
+      backgroundColor: [
+        '#4D4D4D',
+        '#5DA5DA',
+        '#FAA43A',
+        '#60BD68',
+        '#F17CB0',
+        '#B2912F',
+        '#B276B2',
+        '#DECF3F',
+        '#F15854',
+        '#FAA43A',
+        '#60BD68',
+        '#F17CB0',
+        '#B2912F',
+        '#B276B2',
+        '#DECF3F',
+        '#F15854',
+        '#FAA43A',
+        '#60BD68'
+      ]
+    }],
+    labels: _.map(totalOrderByCountries, x => x.name)
+  }
+
   return (
-    <div className="AnalyticsOrderChart" style={{height: 200}}>
-      <Grid columns="2">
-        <Grid.Column>
-          <Chart typeType="bar" highlight={false} data={data} params={{
-              aspectRatio: 0.3
+    <div className="AnalyticsOrderChart" style={{marginBottom: 20}}>
+      <Grid>
+        <Grid.Column computer="8" mobile="16">
+          <BarChart data={data} options={{
+              responsive: true,
+              legend: {
+                display: false
+              }
+            }}/>
+        </Grid.Column>
+        <Grid.Column computer="8" mobile="16">
+          <PieChart data={dataByCountries} options={{
+              responsive: true
             }}/>
         </Grid.Column>
       </Grid>
