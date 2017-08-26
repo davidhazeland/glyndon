@@ -1,3 +1,4 @@
+export { sagas as StoreList } from '../business/store-list'
 export { sagas as Logout } from 'business/logout'
 export { sagas as Authentication } from 'business/authentication'
 export { sagas as Analytics } from 'business/analytics'
