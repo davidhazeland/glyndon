@@ -32,7 +32,7 @@ const AnalyticsLastOrders = (props) => {
                  {moment(order.orderDate, 'X').tz(timezone).format('hh:mm A')}
                </Table.Cell>
                <Table.Cell>
-
+                 {order.customerName}
                </Table.Cell>
                <Table.Cell>
                  {dollar(order.total)}
