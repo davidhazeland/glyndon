@@ -39,7 +39,7 @@ const AnalyticsOrderChart = (props) => {
   const { orders } = props
 
   const ordersByHour = _.groupBy(orders, order => {
-    return moment(order.orderDate).tz(timezone).startOf('hour').format('ha')
+    return moment(order.orderDate, 'X').tz(timezone).startOf('hour').format('ha')
   })
 
   const data = _.map({

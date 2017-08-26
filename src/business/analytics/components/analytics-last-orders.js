@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment-timezone'
+import _ from 'lodash'
 
 const timezone = 'America/Los_Angeles'
 
@@ -21,14 +22,14 @@ const AnalyticsLastOrders = (props) => {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-         {orders.slice(0, 5).map((order, i) => {
+         {_.reverse(orders).slice(0, 5).map((order, i) => {
            return (
              <Table.Row key={i}>
                <Table.Cell>
                  {order.name}
                </Table.Cell>
                <Table.Cell>
-                 {moment(order.orderDate).tz(timezone).format('hh:mm A')}
+                 {moment(order.orderDate, 'X').tz(timezone).format('hh:mm A')}
                </Table.Cell>
                <Table.Cell>
 
