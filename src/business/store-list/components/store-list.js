@@ -28,9 +28,9 @@ const StoreList = (props) => {
         renderers={createRenderers(handleDelete)}
         actions={{fetchRequest}}
         footer={
-          <Link to="/Stores/add">
+          <Link to="/stores/add">
             <Button floated='right' icon labelPosition='left' positive size='small'>
-              <Icon name='cube' /> Add Store
+              <Icon name='shopping bag' /> Add Store
             </Button>
           </Link>
         }
