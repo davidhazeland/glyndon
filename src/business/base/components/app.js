@@ -22,6 +22,7 @@ import {component as AdAccountEdit} from 'business/ad-account-edit'
 import {component as AdAccountAdd} from 'business/ad-account-add'
 
 import {component as ProductList} from 'business/product-list'
+import {component as ProductEdit} from 'business/product-edit'
 
 import restricted from '../containers/restricted'
 
@@ -45,6 +46,7 @@ const App = (props) => {
         <Route exact path="/ad-accounts/add" component={restricted(AdAccountAdd)}/>
 
         <Route exact path="/stores/:storeId/products" component={restricted(ProductList)}/>
+        <Route exact path="/stores/:storeId/products/:id/edit" component={restricted(ProductEdit)}/>
       </Container>
     </div>
   )

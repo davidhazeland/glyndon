@@ -7,6 +7,7 @@ import { Header, Button } from 'semantic-ui-react'
 
 const ProductList = (props) => {
   const {
+    storeId,
     List,
     actions: {
       fetchRequest,
@@ -25,14 +26,14 @@ const ProductList = (props) => {
       <Header as="h3">Product Management</Header>
       <ListComponent
         {...List}
-        renderers={createRenderers(handleDelete)}
+        renderers={createRenderers(handleDelete, storeId)}
         actions={{fetchRequest}}
         />
     </div>
   )
 }
 
-function createRenderers(handleDelete) {
+function createRenderers(handleDelete, storeId) {
   return [
     {header: {text: 'ID'}, body: {render: item => item.uid}},
     {header: {text: 'Title'}, body: {render: item => item.title}},
@@ -40,7 +41,7 @@ function createRenderers(handleDelete) {
     {header: {text: ''}, body: {render: item => {
       return (
         <div>
-          <Link to={`/products/${item.id}/edit`}>
+          <Link to={`/stores/${storeId}/products/${item.id}/edit`}>
             <Button primary size="mini">Edit</Button>
           </Link>
 

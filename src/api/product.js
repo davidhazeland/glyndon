@@ -17,6 +17,7 @@ export function getByStoreId(id) {
 export function fetch({page}, {storeId}) {
   const query = new Parse.Query(Product);
   query.limit(100)
+  query.addAscending('uid')
   query.equalTo('store', new Store({id: storeId}))
   return query.find().then(listMapper)
 }
@@ -36,7 +37,10 @@ export function get(id) {
 export function edit(id, data) {
   const user = new Product()
   user.id = id
-  user.set(data)
+  user.set({
+    ...data,
+    cost: parseFloat(data.cost, 10)
+  })
   return user.save()
 }
 
