@@ -15,6 +15,9 @@ const form = reduxForm({
 
 export default connect(state => ({
   initialValues: mapPath(itemSelectors.get(state), {
-    storeUrl: 'storeUrl'
+    name: 'name',
+    storeUrl: 'storeUrl',
+    apiKey: 'apiKey',
+    apiPassword: 'apiPassword'
   })
 }))(form)

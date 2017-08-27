@@ -42,7 +42,9 @@ const StoreList = (props) => {
 function createRenderers(handleDelete) {
   return [
     {header: {text: 'ID'}, body: {render: item => item.id}},
+    {header: {text: 'Name'}, body: {render: item => item.name}},
     {header: {text: 'URL'}, body: {render: item => item.storeUrl}},
+    {header: {text: 'API Key'}, body: {render: item => item.apiKey}},
     {header: {text: ''}, body: {render: item => {
       return (
         <div>
