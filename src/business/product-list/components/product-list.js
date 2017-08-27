@@ -3,9 +3,9 @@ import React from 'react'
 
 import { List as ListComponent, Confirm } from 'odem/components'
 import { Link } from 'react-router-dom'
-import { Header, Button, Icon } from 'semantic-ui-react'
+import { Header, Button } from 'semantic-ui-react'
 
-const StoreList = (props) => {
+const ProductList = (props) => {
   const {
     List,
     actions: {
@@ -21,19 +21,12 @@ const StoreList = (props) => {
   }
 
   return (
-    <div className="StoreList">
-      <Header as="h3">Store Management</Header>
+    <div className="ProductList">
+      <Header as="h3">Product Management</Header>
       <ListComponent
         {...List}
         renderers={createRenderers(handleDelete)}
         actions={{fetchRequest}}
-        footer={
-          <Link to="/stores/add">
-            <Button floated='right' icon labelPosition='left' positive size='small'>
-              <Icon name='shopping bag' /> Add Store
-            </Button>
-          </Link>
-        }
         />
     </div>
   )
@@ -41,17 +34,13 @@ const StoreList = (props) => {
 
 function createRenderers(handleDelete) {
   return [
-    {header: {text: 'ID'}, body: {render: item => item.id}},
-    {header: {text: 'Name'}, body: {render: item => item.name}},
-    {header: {text: 'URL'}, body: {render: item => item.storeUrl}},
-    {header: {text: 'API Key'}, body: {render: item => item.apiKey}},
+    {header: {text: 'ID'}, body: {render: item => item.uid}},
+    {header: {text: 'Title'}, body: {render: item => item.title}},
+    {header: {text: 'Cost'}, body: {render: item => item.cost}},
     {header: {text: ''}, body: {render: item => {
       return (
         <div>
-          <Link to={`/stores/${item.id}/products`}>
-            <Button basic size="mini">Products</Button>
-          </Link>
-          <Link to={`/stores/${item.id}/edit`}>
+          <Link to={`/products/${item.id}/edit`}>
             <Button primary size="mini">Edit</Button>
           </Link>
 
@@ -71,10 +60,10 @@ function createRenderers(handleDelete) {
   ]
 }
 
-StoreList.propTypes = {
+ProductList.propTypes = {
 
 }
 
-StoreList.displayName = 'StoreList'
+ProductList.displayName = 'ProductList'
 
-export default StoreList
+export default ProductList
