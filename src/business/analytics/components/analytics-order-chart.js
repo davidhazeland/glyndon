@@ -37,6 +37,8 @@ const defaultByHour = {
   '11pm': []
 }
 
+const bestCountries = ['US', 'AU', 'CA', 'UK']
+
 const mapTotalValue = (orders, key) => {
   const totalOrder = orders.reduce((total, order) => {
     return total + order.total
@@ -54,13 +56,16 @@ const AnalyticsOrderChart = (props) => {
     return moment(order.orderDate, 'X').tz(timezone).startOf('hour').format('ha')
   })
 
-  const totalOrderByHour = _.map({
+  const totalOrderByHour = _.dropRightWhile(_.map({
     ...defaultByHour,
     ...ordersByHour
-  }, mapTotalValue)
+  }, mapTotalValue), (order, i) => {
+    return order.value === '0.00' && i > 11
+  })
 
   const ordersByCountries = _.groupBy(orders, order => {
-    return order.shippingCountry
+    const country = order.shippingCountry
+    return bestCountries.includes(country) ? country : 'Other'
   })
 
   const totalOrderByCountries = _.map(ordersByCountries, mapTotalValue)
