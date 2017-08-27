@@ -9,11 +9,15 @@ import { Container } from 'semantic-ui-react'
 
 import {component as Authentication} from 'business/authentication'
 import {component as Welcome} from 'business/welcome'
+
 import {component as Analytics} from 'business/analytics'
 import {component as Report} from 'business/report'
+
 import {component as StoreList} from 'business/store-list'
 import {component as StoreEdit} from 'business/store-edit'
 import {component as StoreAdd} from 'business/store-add'
+
+import {component as AdAccountList} from 'business/ad-account-list'
 
 import restricted from '../containers/restricted'
 
@@ -27,9 +31,12 @@ const App = (props) => {
         <Route path="/" exact component={restricted(Welcome)}/>
         <Route path="/analytics/:storeId" component={restricted(Analytics)}/>
         <Route path="/report/:storeId" component={restricted(Report)}/>
+
         <Route exact path="/stores" component={restricted(StoreList)}/>
         <Route exact path="/stores/:id/edit" component={restricted(StoreEdit)}/>
         <Route exact path="/stores/add" component={restricted(StoreAdd)}/>
+
+        <Route exact path="/ad-accounts" component={restricted(AdAccountList)}/>
       </Container>
     </div>
   )
