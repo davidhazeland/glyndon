@@ -1,10 +1,11 @@
 import React from 'react'
 
+import { Link } from 'react-router-dom'
+import { Loader, Button, Dropdown, Grid } from 'semantic-ui-react'
+
 import Order from './analytics-order'
 import Profit from './analytics-profit'
-
-import { Link } from 'react-router-dom'
-import { Loader, Button, Dropdown } from 'semantic-ui-react'
+import Advert from './analytics-advert'
 
 import LastOrders from './analytics-last-orders'
 import OrderChart from './analytics-order-chart'
@@ -48,20 +49,45 @@ const Analytics = (props) => {
       <Loader active={pure}/>
 
       {!pure &&
-        <div>
-          <Link to={`/report/${storeId}`} style={{margin: '10px 0', float: 'right'}}>
-            <Button basic size="mini">Report</Button>
-          </Link>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column textAlign="right">
+              <Link to={`/report/${storeId}`}>
+                <Button basic size="mini">Report</Button>
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
 
-          <div style={{clear: 'both'}}>
-            <OrderChart orders={orders}/>
+          <Grid.Row>
+            <Grid.Column>
+              <OrderChart orders={orders}/>
+              </Grid.Column>
+          </Grid.Row>
 
-            <Order {...props}/>
-            <Profit {...props}/>
+          <Grid.Row>
+            <Grid.Column>
+              <Order {...props}/>
+            </Grid.Column>
+          </Grid.Row>
 
-            <LastOrders orders={orders} products={products}/>
-          </div>
-        </div>
+          <Grid.Row>
+            <Grid.Column>
+                <Profit {...props}/>
+              </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column>
+                <Advert {...props}/>
+              </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row>
+            <Grid.Column>
+              <LastOrders orders={orders} products={products}/>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       }
     </div>
   )

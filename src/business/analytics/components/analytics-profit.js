@@ -13,7 +13,7 @@ const AnalyticsProfit = (props) => {
   const profit = revenue-(spend+cost)
 
   return (
-    <div className="AnalyticsProfit" style={{marginTop: 20}}>
+    <div className="AnalyticsProfit">
       <Message
         attached
         header='Finance'

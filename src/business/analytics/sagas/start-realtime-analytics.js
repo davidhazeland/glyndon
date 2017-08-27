@@ -74,6 +74,8 @@ export function* getAnalytics(storeId, filter) {
       orders: jsonOrders,
       products: jsonProducts,
 
+      adInsights: adInsights.map(toJSON),
+
       pure: false
     }
 

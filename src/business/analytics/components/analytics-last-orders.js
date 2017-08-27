@@ -11,7 +11,7 @@ const AnalyticsLastOrders = (props) => {
   const { orders } = props
 
   return (
-    <div className="AnalyticsLastOrders" style={{marginTop: 20}}>
+    <div className="AnalyticsLastOrders">
       <Table>
         <Table.Header>
           <Table.Row>
