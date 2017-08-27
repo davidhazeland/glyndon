@@ -8,3 +8,8 @@ export const ErrorCode = {
   USER_NOT_FOUND: 7,
   UNDEFINED_ERROR: 8
 }
+
+export const StoreList = {
+  'RMQrzVJo9C': 'David Hazeland',
+  'GYniQV6lRB': 'Infinit Store'
+}

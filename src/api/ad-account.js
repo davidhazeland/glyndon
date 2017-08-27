@@ -6,6 +6,7 @@ import * as myself from './ad-account'
 export default myself
 
 const AdvertAccount = Parse.Object.extend('AdvertAccount');
+const Store = Parse.Object.extend('Store');
 
 export function fetch({page}) {
   const query = new Parse.Query(AdvertAccount);
@@ -26,20 +27,26 @@ export function get(id) {
 }
 
 export function edit(id, data) {
-  const user = new AdvertAccount()
-  user.id = id
-  user.set(data)
-  return user.save()
+  const adAccount = new AdvertAccount()
+  adAccount.id = id
+  adAccount.set({
+    ...data,
+    store: new Store({id: data.store})
+  })
+  return adAccount.save()
 }
 
 export function add(data) {
-  const user = new AdvertAccount()
-  user.set(data)
-  return user.save()
+  const adAccount = new AdvertAccount()
+  adAccount.set({
+    ...data,
+    store: new Store({id: data.store})
+  })
+  return adAccount.save()
 }
 
 export function remove(id) {
-  const user = new AdvertAccount()
-  user.id = id
-  return user.destroy()
+  const adAccount = new AdvertAccount()
+  adAccount.id = id
+  return adAccount.destroy()
 }

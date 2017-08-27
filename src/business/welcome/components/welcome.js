@@ -5,10 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { dollar, percent, decimal } from 'utils/format'
 
-const storeName = {
-  'RMQrzVJo9C': 'David Hazeland',
-  'GYniQV6lRB': 'Infinit Store'
-}
+import { StoreList } from 'constants'
 
 const Welcome = (props) => {
   const {
@@ -33,7 +30,7 @@ const Welcome = (props) => {
           <Link to={`/analytics/${id}`} key={i} style={{marginTop: 25, display: 'block'}}>
             <Message
               attached
-              header={storeName[id]}
+              header={StoreList[id]}
             />
             <Segment className='attached fluid'>
               <Grid doubling textAlign="center" relaxed columns="6">

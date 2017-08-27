@@ -21,6 +21,7 @@ const Header = (props) => {
       <Menu pointing secondary>
         <Menu.Item name='home' as={Link} to="/"  />
         <Menu.Item name='store' as={Link} to="/stores" />
+        <Menu.Item name='avert account' as={Link} to="/ad-accounts" />
         <Menu.Menu position='right'>
           {isAuthorized() && <Menu.Item name='logout' onClick={handleLogout}/>}
         </Menu.Menu>
