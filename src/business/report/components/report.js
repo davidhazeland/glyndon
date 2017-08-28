@@ -88,7 +88,7 @@ function createRenderers() {
     {header: {text: 'Ad Spent'}, body: {render: item => dollar(item.data.adSpent)}},
     {header: {text: 'Profit'}, body: {render: item => {
       return (
-        <Label color={item.data.profit > 0 ? 'green' : 'red'}>
+        <Label basic color={item.data.profit > 0 ? 'green' : 'red'}>
           {dollar(item.data.profit)}
         </Label>
       )
