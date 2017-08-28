@@ -14,10 +14,10 @@ export function* handle(action) {
   const {payload} = action
   const {data, form} = payload
   try {
-    const {email, password} = data
+    const {username, password} = data
 
     yield put(startSubmit(form))
-    yield call(API.authorize, {email, password})
+    yield call(API.authorize, {username, password})
 
     yield put(push('/'))
   }

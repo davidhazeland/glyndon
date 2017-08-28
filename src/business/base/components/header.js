@@ -17,8 +17,6 @@ const Header = (props) => {
     logoutRequest()
   }
 
-  console.log(path);
-
   return (
     <div className="Header" style={{marginBottom: 20}}>
       <Menu pointing secondary>

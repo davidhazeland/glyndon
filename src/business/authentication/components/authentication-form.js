@@ -13,8 +13,8 @@ const AuthenticationForm = (props) => {
   return (
     <Form {...props} className="AuthenticationForm">
       <Field
-        name="email"
-        label="Email"
+        name="username"
+        label="Username"
         component={TextBox}
         componentProps={{
         }}
