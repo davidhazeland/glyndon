@@ -55,8 +55,10 @@ export function* getAnalytics(storeId, filter) {
       return total + adInsight.toJSON().spend
     }, 0)
 
-    const orders = yield call(orderAPI.getByStoreId, storeId, startTimestamp, endTimestamp)
-    const products = yield call(productAPI.getByStoreId, storeId)
+    const [orders, products] = yield all([
+      call(orderAPI.getByStoreId, storeId, startTimestamp, endTimestamp),
+      call(productAPI.getByStoreId, storeId)
+    ])
 
     const toJSON = o => o.toJSON()
     const jsonOrders = orders.map(toJSON)
