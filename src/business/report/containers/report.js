@@ -23,6 +23,7 @@ class Report extends Component {
 
   componentWillUnmount() {
     this.props.actions.clear()
+    this.props.actions.clearList()
   }
 
   render() {
