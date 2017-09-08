@@ -37,7 +37,7 @@ const defaultByHour = {
   '11pm': []
 }
 
-const bestCountries = ['US', 'AU', 'CA', 'UK', 'NZ']
+const bestCountries = ['US', 'AU', 'CA', 'UK', 'NZ', 'GB']
 
 const mapTotalValue = (orders, key) => {
   const totalOrder = orders.reduce((total, order) => {
