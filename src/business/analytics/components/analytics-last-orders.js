@@ -19,6 +19,7 @@ const AnalyticsLastOrders = (props) => {
             <Table.HeaderCell>Date</Table.HeaderCell>
             <Table.HeaderCell>Customer</Table.HeaderCell>
             <Table.HeaderCell>Total</Table.HeaderCell>
+            <Table.HeaderCell>Country</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -36,6 +37,9 @@ const AnalyticsLastOrders = (props) => {
                </Table.Cell>
                <Table.Cell>
                  {dollar(order.total)}
+               </Table.Cell>
+               <Table.Cell>
+                 {order.shippingCountry}
                </Table.Cell>
              </Table.Row>
            )
