@@ -37,7 +37,7 @@ const defaultByHour = {
   '11pm': []
 }
 
-const bestCountries = ['US', 'AU', 'CA', 'UK', 'NZ', 'GB']
+const bestCountries = ['US', 'AU', 'CA', 'UK', 'GB']
 
 const mapTotalValue = (orders, key) => {
   const totalOrder = orders.reduce((total, order) => {
@@ -56,19 +56,19 @@ const AnalyticsOrderChart = (props) => {
     return moment(order.orderDate, 'X').tz(timezone).startOf('hour').format('ha')
   })
 
-  const totalOrderByHour = _.dropRightWhile(_.map({
+  const totalOrderByHour = _.map({
     ...defaultByHour,
     ...ordersByHour
-  }, mapTotalValue), (order, i) => {
-    return order.value === '0.00' && i > 11
-  })
+  }, mapTotalValue)
 
   const ordersByCountries = _.groupBy(orders, order => {
     const country = order.shippingCountry
     return bestCountries.includes(country) ? country : 'Other'
   })
 
-  const totalOrderByCountries = _.map(ordersByCountries, mapTotalValue)
+  const totalOrderByCountries = _.sortBy(_.map(ordersByCountries, mapTotalValue), o => {
+    return -1 * parseFloat(o.value, 10)
+  })
 
   const data =  {
       labels: _.map(totalOrderByHour, x => x.name),
@@ -83,23 +83,11 @@ const AnalyticsOrderChart = (props) => {
       data: _.map(totalOrderByCountries, x => x.value),
       backgroundColor: [
         '#5DA5DA',
-        '#FAA43A',
-        '#60BD68',
         '#F17CB0',
-        '#B2912F',
-        '#B276B2',
-        '#DECF3F',
-        '#F15854',
-        '#FAA43A',
         '#60BD68',
-        '#F17CB0',
-        '#B2912F',
         '#B276B2',
-        '#DECF3F',
-        '#F15854',
         '#FAA43A',
-        '#60BD68',
-        '#4D4D4D'
+        '#DECF3F'
       ]
     }],
     labels: _.map(totalOrderByCountries, x => x.name)
