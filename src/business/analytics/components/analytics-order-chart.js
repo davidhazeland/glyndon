@@ -8,7 +8,7 @@ const timezone = 'America/Los_Angeles'
 import { Grid } from 'semantic-ui-react'
 import { Bar as BarChart, Pie as PieChart } from 'react-chartjs-2'
 
-import { decimal } from 'utils/format'
+import { decimal, dollar, percent } from 'utils/format'
 
 const defaultByHour = {
   '12am': [],
@@ -50,7 +50,7 @@ const mapTotalValue = (orders, key) => {
 }
 
 const AnalyticsOrderChart = (props) => {
-  const { orders } = props
+  const { orders, revenue } = props
 
   const ordersByHour = _.groupBy(orders, order => {
     return moment(order.orderDate, 'X').tz(timezone).startOf('hour').format('ha')
@@ -80,7 +80,7 @@ const AnalyticsOrderChart = (props) => {
 
   const dataByCountries = {
     datasets: [{
-      data: _.map(totalOrderByCountries, x => x.value),
+      data: _.map(totalOrderByCountries, x => x.value / revenue),
       backgroundColor: [
         '#5DA5DA',
         '#F17CB0',
@@ -101,6 +101,13 @@ const AnalyticsOrderChart = (props) => {
               responsive: true,
               legend: {
                 display: false
+              },
+              tooltips: {
+                callbacks: {
+                  label: (item) => {
+                    return dollar(item.yLabel)
+                  }
+                }
               }
             }}/>
         </Grid.Column>
@@ -109,6 +116,15 @@ const AnalyticsOrderChart = (props) => {
               responsive: true,
               legend: {
                 position: 'bottom'
+              },
+              tooltips: {
+                callbacks: {
+                  label: (item, {datasets, labels}) => {
+                    const label = labels[item.index]
+                    const value = datasets[item.datasetIndex].data[item.index]
+                    return `${label}: ${percent(value)}`
+                  }
+                }
               }
             }}/>
         </Grid.Column>

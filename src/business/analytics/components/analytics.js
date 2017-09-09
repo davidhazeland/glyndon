@@ -30,6 +30,7 @@ const Analytics = (props) => {
 
     orders,
     products,
+    revenue,
 
     actions: {
       changeFilter
@@ -60,7 +61,7 @@ const Analytics = (props) => {
 
           <Grid.Row>
             <Grid.Column>
-              <OrderChart orders={orders}/>
+              <OrderChart orders={orders} revenue={revenue}/>
               </Grid.Column>
           </Grid.Row>
 
