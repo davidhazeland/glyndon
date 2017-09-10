@@ -14,12 +14,45 @@ import productAPI from 'api/product'
 const timeout = 10000
 const timezone = 'America/Los_Angeles'
 
+const variantPrices = {
+    '15': 6.32,
+    '5': 6.41,
+    '9': 6.51,
+    '13': 5.95,
+    '38': 6.95,
+    '28': 6.33,
+    '7': 6.83,
+    '4': 5.82,
+    '32': 6.32,
+    '19': 6.17,
+    '11': 6.15,
+    '17': 6.14,
+    '34': 6.36,
+    '36': 6.52,
+
+    '16': 11.95,
+    '6': 11.95,
+    '10': 12.36,
+    '14': 10.82,
+    '39': 14.23,
+    '29': 11.94,
+    '8': 12.91,
+    '21': 11.95,
+    '33': 11.95,
+    '20': 11.95,
+    '12': 11.95,
+    '18': 12.59,
+    '35': 12.73,
+    '37': 12.36
+}
+
 export function getInfo(orders, products) {
   return orders.reduce((reduction, order) => {
     const items = order.items;
     const totalCost = items.reduce((total, item) => {
       const product = products.find(p => p.uid === item.product_id)
-      const price = product ? product.cost * item.quantity : 0
+      const cost = item.variant_id ? variantPrices[item.variant_id] : product.cost
+      const price = product ? cost * item.quantity : 0
       return total + price
     }, 0)
 
