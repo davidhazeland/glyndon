@@ -12,15 +12,19 @@ import { actions as myActions, selectors as mySelectors } from 'business/day-rep
 
 import DayReportComponent from '../components/day-report'
 
+import moment from 'moment'
+
+import { StoreIdList } from 'constants'
+
 class DayReport extends Component {
   componentWillMount() {
     this.props.actions.fetchRequest({
       query: {
-        since: '2017-09-01',
-        until: '2017-09-10'
+        since: moment().day(-7).format('YYYY-MM-DD'),
+        until: moment().format('YYYY-MM-DD')
       },
       params: {
-        storeId: 1
+        storeId: StoreIdList[this.props.storeId]
       }
     });
   }

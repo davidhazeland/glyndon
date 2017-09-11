@@ -18,7 +18,7 @@
     "odem": "^0.2.4",
     "parse": "^1.10.0",
     "radium": "^0.18.2",
-    "raket-react": "git+ssh://git@github.com/ironnext/raket-react.git",
+    "raket-react": "git+ssh://git@github.com:davidhazeland/raket-react.git",
     "react": "15.4.2",
     "react-chartjs-2": "^2.6.1",
     "react-document-title": "2.0.2",

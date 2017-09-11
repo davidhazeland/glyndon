@@ -4989,9 +4989,9 @@ radium@^0.18.2:
     inline-style-prefixer "^2.0.5"
     rimraf "^2.6.1"
 
-"raket-react@git+ssh://git@github.com/ironnext/raket-react.git":
+"raket-react@git+ssh://git@github.com:davidhazeland/raket-react.git":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/ironnext/raket-react.git#b4049cbe4fa7df9018608894ed61dfcee852e6ab"
+  resolved "git+ssh://git@github.com:davidhazeland/raket-react.git#b4049cbe4fa7df9018608894ed61dfcee852e6ab"
   dependencies:
     babel-polyfill "6.23.0"
     deep-freeze "0.0.1"

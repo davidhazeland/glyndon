@@ -5,8 +5,11 @@ import moment from 'moment'
 import { Header, Grid, Table, Loader } from 'semantic-ui-react'
 
 import { Bar as BarChart } from 'react-chartjs-2'
+import Filter from '../containers/day-report-filter'
 
 import { dollar } from 'utils/format'
+
+import { StoreIdList } from 'constants'
 
 const getDayName = number => {
   return moment().day(number).format('dddd')
@@ -14,9 +17,13 @@ const getDayName = number => {
 
 const DayReport = (props) => {
   const {
+    storeId,
     List: {
       data,
       isFetching
+    },
+    actions: {
+      fetchRequest
     }
   } = props
 
@@ -62,9 +69,20 @@ const DayReport = (props) => {
     }]
   }
 
+  function handleSubmit(data) {
+    fetchRequest({
+      query: data,
+      params: {
+        storeId: StoreIdList[storeId]
+      }
+    })
+  }
+
   return (
     <div className="DayReport">
       <Header as="h3">Orders By Day</Header>
+
+      <Filter onSubmit={handleSubmit}/>
 
       <Loader active={isFetching}/>
 
@@ -77,6 +95,13 @@ const DayReport = (props) => {
                   responsive: true,
                   legend: {
                     display: false
+                  },
+                  scales: {
+                      yAxes: [{
+                          ticks: {
+                            min: 0
+                          }
+                      }]
                   }
                 }}/>
             </Grid.Column>
@@ -97,6 +122,7 @@ const DayReport = (props) => {
                   scales: {
                       yAxes: [{
                           ticks: {
+                            min: 0,
                             callback: function(value) {
                                 return dollar(value);
                             }
@@ -122,9 +148,10 @@ const DayReport = (props) => {
                   scales: {
                       yAxes: [{
                           ticks: {
-                              callback: function(value) {
-                                  return dollar(value);
-                              }
+                            min: 0,
+                            callback: function(value) {
+                                return dollar(value);
+                            }
                           }
                       }]
                   }
@@ -137,10 +164,12 @@ const DayReport = (props) => {
           <Grid.Row>
             <Table>
               <Table.Header>
-                <Table.HeaderCell>Day</Table.HeaderCell>
-                <Table.HeaderCell>Orders</Table.HeaderCell>
-                <Table.HeaderCell>Amount</Table.HeaderCell>
-                <Table.HeaderCell>AOV</Table.HeaderCell>
+                <Table.Row>
+                  <Table.HeaderCell>Day</Table.HeaderCell>
+                  <Table.HeaderCell>Orders</Table.HeaderCell>
+                  <Table.HeaderCell>Amount</Table.HeaderCell>
+                  <Table.HeaderCell>AOV</Table.HeaderCell>
+                </Table.Row>
               </Table.Header>
               <Table.Body>
                 {_.map(dataByDay, (item, day) => {

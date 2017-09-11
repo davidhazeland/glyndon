@@ -13,3 +13,8 @@ export const StoreList = {
   'RMQrzVJo9C': 'David Hazeland',
   'GYniQV6lRB': 'Infinit Store'
 }
+
+export const StoreIdList = {
+  'RMQrzVJo9C': 1,
+  'GYniQV6lRB': 2
+}

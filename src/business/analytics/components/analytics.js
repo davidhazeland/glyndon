@@ -56,6 +56,9 @@ const Analytics = (props) => {
               <Link to={`/report/${storeId}`}>
                 <Button basic size="mini">Report</Button>
               </Link>
+              <Link to={`/stores/${storeId}/day-report`}>
+                <Button basic size="mini">Orders by Day</Button>
+              </Link>
             </Grid.Column>
           </Grid.Row>
 
