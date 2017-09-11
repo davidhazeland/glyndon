@@ -5,13 +5,13 @@ const base = {
 
 const env = {
   development: {
-    apiBaseURL: 'http://localhost:4000'
+    apiBaseURL: 'https://dropist.io/api'
   },
   test: {
 
   },
   production: {
-    apiBaseURL: ''
+    apiBaseURL: 'https://dropist.io/api'
   }
 }
 

@@ -1,3 +1,4 @@
+export { sagas as DayReport } from '../business/day-report'
 export { sagas as ProductEdit } from '../business/product-edit'
 export { sagas as AdAccountEdit } from '../business/ad-account-edit'
 export { sagas as StoreEdit } from '../business/store-edit'
