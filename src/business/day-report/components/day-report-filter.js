@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Form, Field, DatePicker } from 'odem/components'
+import { Form, Field, DatePicker, SelectBox } from 'odem/components'
 import { Button, Form as FormComponent } from 'semantic-ui-react'
 
 import moment from 'moment'
@@ -10,6 +10,23 @@ const DayReportFilter = (props) => {
     <div className="DayReportFilter">
       <Form {...props}>
         <FormComponent.Group inline>
+          <Field
+            name="country"
+            component={SelectBox}
+            componentProps={{
+              options: [
+                {key: 'all', value: 'All', text: 'All'},
+                {key: 'us', value: 'US', text: 'United States'},
+                {key: 'ca', value: 'CA', text: 'Canada'},
+                {key: 'gb', value: 'GB', text: 'United Kingdom'},
+                {key: 'au', value: 'AU', text: 'Australia'}
+              ]
+            }}
+            fieldProps={{
+              inline: true
+            }}
+            />
+
           <Field
             name="since"
             component={DatePicker}

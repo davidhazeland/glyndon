@@ -20,14 +20,21 @@ const DayReport = (props) => {
     storeId,
     List: {
       data,
-      isFetching
+      isFetching,
+      query: {
+        country
+      }
     },
     actions: {
       fetchRequest
     }
   } = props
 
-  const ordersByDay = _.groupBy(data, o => {
+  const filteredByCountry = country && country !== 'All' ? _.filter(data, o => {
+    return o.country === country
+  }) : data
+
+  const ordersByDay = _.groupBy(filteredByCountry, o => {
     return moment(o.datetime).day()
   })
 
