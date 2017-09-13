@@ -43,7 +43,20 @@ const variantPrices = {
     '12': 11.95,
     '18': 12.59,
     '35': 12.73,
-    '37': 12.36
+    '37': 12.36,
+
+    '40': 5.87,
+    '41': 11.68,
+    '42': 5.87,
+    '43': 11.68,
+    '44': 5.87,
+    '45': 11.68,
+    '46': 5.87,
+    '47': 11.68,
+    '48': 5.87,
+    '49': 11.68,
+    '50': 5.87,
+    '51': 11.68
 }
 
 export function getInfo(orders, products) {
@@ -51,7 +64,7 @@ export function getInfo(orders, products) {
     const items = order.items;
     const totalCost = items.reduce((total, item) => {
       const product = products.find(p => p.uid === item.product_id)
-      const cost = item.variant_id ? variantPrices[item.variant_id] : product.cost
+      const cost = item.variant_id && variantPrices[item.variant_id] ? variantPrices[item.variant_id] : product.cost
       const price = product ? cost * item.quantity : 0
       return total + price
     }, 0)
